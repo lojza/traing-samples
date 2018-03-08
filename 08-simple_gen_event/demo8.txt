@@ -1,0 +1,9 @@
+demo8_event:start_link().
+demo8_handler:start().
+
+demo8_handler:get_stat().
+demo8_event:notify(ok).
+
+[ demo8_event:notify(ok) || _ <-lists:seq(1,1000)].
+[ demo8_event:notify({error, I rem 12}) || I <-lists:seq(1,1000)].
+[ demo8_event:notify(I) || I <-lists:seq(1,1000)].

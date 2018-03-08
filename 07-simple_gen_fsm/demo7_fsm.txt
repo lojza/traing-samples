@@ -1,0 +1,14 @@
+erdbg:start().
+dbg:tracer().
+dbg:p(all,c).
+dbg:tpl(demo7_fsm, '_', []). 
+
+demo7_fsm:start_link(c1, "127.0.0.1", 4567).
+demo7_fsm:connect(c1).
+
+{ok, LS} = gen_tcp:listen(4567, []).
+
+
+dbg:tpl(gen_tcp, '_', []).
+
+gen_tcp:close(LS).

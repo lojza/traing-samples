@@ -1,0 +1,11 @@
+erl -boot start_sasl
+
+demo9:start().
+observer:start().
+
+demo9_worker:run1(2).
+demo9_worker:run2(3).
+demo9_worker:get_result().
+
+demo9_worker:run2(0).
+demo9_worker:run1(0).

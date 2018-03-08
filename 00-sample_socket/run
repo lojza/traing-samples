@@ -1,0 +1,4 @@
+#!/bin/sh
+
+NODE=node1@localhost
+erl -sname $NODE -noshell -run demo_connect start

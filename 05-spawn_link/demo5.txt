@@ -1,0 +1,21 @@
+Priklady se spawn a spawn_link, kdy se vola neexistujici funkce
+
+121> self().
+<0.182.0>
+122> spawn(foo, bar, [1]).
+<0.19640.0>
+123> 
+=ERROR REPORT==== 2-Jun-2016::19:50:54 ===
+Error in process <0.19640.0> with exit value: {undef,[{foo,bar,[1],[]}]}
+
+
+123> spawn_link(foo, bar, [1]).
+<0.19672.0>
+     
+=ERROR REPORT==== 2-Jun-2016::19:51:10 ===
+Error in process <0.19672.0> with exit value: {undef,[{foo,bar,[1],[]}]}
+
+** exception error: undefined function foo:bar/1
+124> self().                   
+<0.19674.0>
+125> 
