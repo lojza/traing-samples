@@ -1,0 +1,6 @@
+*.beam
+*_crash.dump
+.rebar*
+_build
+*.dets
+*.sw?

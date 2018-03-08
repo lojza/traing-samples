@@ -4,7 +4,8 @@ erl -sname admin@localhost -remsh node1@localhost
 
 dbg:start().
 dbg:tracer().
-dbg:p(all,c).
+dbg:p(all, c).
+
 dbg:tp(gen_tcp, '_', []).
 dbg:tp(demo_connect, '_', []).
 dbg:ctp().

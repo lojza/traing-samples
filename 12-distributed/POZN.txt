@@ -1,0 +1,11 @@
+erl -sname node_a@localhost
+erl -sname node_b@localhost
+
+net_adm:ping('node_a@localhost').
+net_adm:ping('node_b@localhost').
+
+
+spawn('node_b@localhost', dist_test, test1, [self()]).
+spawn('node_b@localhost', dist_test, test2, [self()]).
+spawn('node_b@localhost', dist_test, test3, [self()]).
+rpc:call(node_b@localhost, io, format, ["test rpc~n"]).

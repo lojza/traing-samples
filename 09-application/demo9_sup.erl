@@ -14,7 +14,7 @@ init (_StartArgs) ->
     Worker  = {
         worker,
         {demo9_worker, start_link, []}, 
-	permanent, 500, worker, [demo9_worker]
+	    permanent, 500, worker, [demo9_worker]
     },
 
     {ok, {{one_for_all, 1, 1}, [Worker]}}.

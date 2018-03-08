@@ -1,0 +1,9 @@
+application:start(userdb).
+application:stop(userdb).
+
+Name = fun (N) -> lists:flatten(io_lib:format("user_~p", [N])) end.
+
+[userdb:create_user(I, Name(I)) || I <- lists:seq(1000000)].
+fcg:run(userdb,lookup, [32232], 10000).
+fcg:run(userdb,lookup_by_login,["user_567788"], 100000).
+[userdb:set_feature(I, f1, true) || I <- lists:seq(1,1000000)].

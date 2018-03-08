@@ -18,7 +18,7 @@ start(Host, Port) ->
     loop(Socket, 0).
 
 loop(Socket, N) ->
-    Msg = io_lib:format("hello: msg ~p~n", [N]),
+    Msg = io_lib:format("*** hello: msg v2 ~p~n", [N]),
     ok = gen_tcp:send(Socket, Msg),
-    timer:sleep(1000),
-    demo_connect:loop(Socket, N + 1).
+    timer:sleep(2000),
+    demo_connect:loop(Socket, N + 2).
