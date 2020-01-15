@@ -1,0 +1,8 @@
+{application, msisdndb,
+ [{description, "MSISDN numbering plan"},
+  {vsn, "1.0"},
+  {modules, []},
+  {registered, []},
+  {applications, [kernel, stdlib]},
+  {mod, {msisdndb_app, []}},
+  {env, []}]}.
