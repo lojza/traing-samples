@@ -13,6 +13,8 @@
                       {integer(), integer()} |  % real types
                       binary().                 % string or raw type
 
+-define(FILE_BUFF_SIZE, 64000).
+
 %%
 %% Read Exif infomation from file.
 %%
@@ -23,7 +25,7 @@
       Reason :: not_found | term().
 
 read_file(FileName) ->
-    case file:open(FileName, [read, raw]) of
+    case file:open(FileName, [read, raw, binary]) of
         {ok, IoDevice} ->
             Result = read_file_loop(IoDevice, undefined),
             file:close(IoDevice),
@@ -32,9 +34,8 @@ read_file(FileName) ->
     end.
 
 read_file_loop(IoDevice, Buff) ->
-    case file:read(IoDevice, 1) of
+    case file:read(IoDevice, ?FILE_BUFF_SIZE) of
         {ok, Bin0} ->
-            tu je nekde chyba
             Bin = case Buff of
                       undefined -> Bin0;
                       B -> list_to_binary([B, Bin0])

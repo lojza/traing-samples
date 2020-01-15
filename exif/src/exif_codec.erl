@@ -26,14 +26,17 @@ read_SOI(_) -> throw({codec_error, invalid_SOI}).
 
 read_APP1(<<16#ff, 16#e1, Len:16/unsigned, "Exif", _NULL:8, _Padding:8, Rest0/binary>>) ->
     Size = Len - 10,
-    <<APP1:Size/bytes, _Rest/binary>> = Rest0,
-    APP1;
+    case Rest0 of
+        <<APP1:Size/bytes, _Rest/binary>> -> APP1;
+        _ -> throw({codec_error, need_more_data})
+    end;
 read_APP1(<<16#ff, 16#e1, Bin/binary>>) when byte_size(Bin) < 8  -> throw({codec_error, need_more_data});
 read_APP1(<<16#ff, _Tag:8, Len:16/unsigned, Rest0/binary>>) ->
     Size = Len - 2,
     <<_Value:Size/bytes, Rest/binary>> = Rest0,
     read_APP1(Rest);
 read_APP1(<<16#ff, Bin/binary>>) when byte_size(Bin) < 3  -> throw({codec_error, need_more_data});
+read_APP1(<<>>) -> throw({codec_error, need_more_data});
 read_APP1(_Rest) ->
     throw({codec_error, exif_not_found}).
 
